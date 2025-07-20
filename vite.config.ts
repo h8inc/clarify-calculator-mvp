@@ -10,4 +10,8 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    host: true,  // Enables full-width access on local network
+    port: 5173,  // Consistent port
+  },
 });
