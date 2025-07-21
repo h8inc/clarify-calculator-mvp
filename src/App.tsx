@@ -1,15 +1,28 @@
+import React, { useState } from 'react';
 import ResultsCard from './components/results-card';
 import SlidersPanel from './components/SlidersPanel';
 import { Sheet, SheetTrigger, SheetContent } from './components/ui/sheet';
 import { Button } from './components/ui/button';
 
 function App() {
+  // Lift slider state to App
+  const [headcount, setHeadcount] = useState(5);
+  const [adminTime, setAdminTime] = useState(20);
+  const [avgPay, setAvgPay] = useState(75000);
+
   return (
     <div className="h-screen w-full bg-[#F0F2F4]">
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 p-4 md:p-8">
         {/* Desktop/Tablet: Side panel, hidden on mobile */}
         <div className="w-full lg:w-[35%] flex justify-center items-stretch hidden lg:flex">
-          <SlidersPanel />
+          <SlidersPanel
+            headcount={headcount}
+            setHeadcount={setHeadcount}
+            adminTime={adminTime}
+            setAdminTime={setAdminTime}
+            avgPay={avgPay}
+            setAvgPay={setAvgPay}
+          />
         </div>
         {/* Mobile: Sticky bottom sheet trigger */}
         <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center lg:hidden p-4 pointer-events-none">
@@ -19,14 +32,25 @@ function App() {
             </SheetTrigger>
             <SheetContent side="bottom" className="p-0 rounded-t-2xl border-none pb-[env(safe-area-inset-bottom)] !max-h-[90vh] !overflow-y-auto items-start">
               <div className="p-4">
-                <SlidersPanel />
+                <SlidersPanel
+                  headcount={headcount}
+                  setHeadcount={setHeadcount}
+                  adminTime={adminTime}
+                  setAdminTime={setAdminTime}
+                  avgPay={avgPay}
+                  setAvgPay={setAvgPay}
+                />
               </div>
             </SheetContent>
           </Sheet>
         </div>
         {/* Results card always visible */}
         <div className="w-full lg:w-[65%] flex justify-center items-start">
-          <ResultsCard />
+          <ResultsCard
+            headcount={headcount}
+            adminTime={adminTime}
+            avgPay={avgPay}
+          />
         </div>
       </div>
     </div>

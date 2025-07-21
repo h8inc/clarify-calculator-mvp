@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LabelList } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LabelList, Tooltip } from 'recharts';
 
 const COLORS = {
   sellingHex: '#BEE8FD',
@@ -29,12 +29,31 @@ const CustomYAxisTick = ({ x, y, payload }: any) => (
   </g>
 );
 
+// Custom tooltip for desktop
+const CustomTooltip = ({ active, payload, label, chartHours }: any) => {
+  if (active && payload && payload.length) {
+    const bar = chartHours.find((row: any) => row.name === label);
+    return (
+      <div className="rounded-lg bg-white border border-gray-200 px-4 py-2 shadow text-sm text-gray-600">
+        <div className="font-semibold text-gray-900 mb-1">{label}</div>
+        <div>Selling: <span className="font-bold">{bar.Selling} hours</span></div>
+        <div>Admin: <span className="font-bold">{bar.Admin} hours</span></div>
+      </div>
+    );
+  }
+  return null;
+};
+
 interface ResultsChartProps {
   chartData: Array<{ name: string; Selling: number; Admin: number }>;
+  chartHours: Array<{ name: string; Selling: number; Admin: number }>;
+  ariaMessage: string;
 }
 
-const ResultsChart: React.FC<ResultsChartProps> = ({ chartData }) => (
+const ResultsChart: React.FC<ResultsChartProps> = ({ chartData, chartHours, ariaMessage }) => (
   <div className="flex flex-col gap-8 w-full" aria-label="results-chart">
+    {/* ARIA live region for accessibility */}
+    <div aria-live="polite" className="sr-only">{ariaMessage}</div>
     <ResponsiveContainer width="100%" height={160}>
       <BarChart
         data={chartData}
@@ -51,13 +70,20 @@ const ResultsChart: React.FC<ResultsChartProps> = ({ chartData }) => (
           width={55}
           tick={<CustomYAxisTick />}
         />
+        <Tooltip
+          content={(props) => <CustomTooltip {...props} chartHours={chartHours} />}
+          wrapperClassName="hidden md:block"
+        />
         <Bar
           dataKey="Selling"
           stackId="a"
           fill={COLORS.sellingHex}
           radius={[16, 0, 0, 16]}
-          isAnimationActive={false}
+          isAnimationActive={true}
+          animationDuration={400}
           barSize={48}
+          style={{ pointerEvents: 'none' }} // Prevents all hover/focus highlight and disables tooltip
+          activeBar={false}
         >
           <LabelList
             dataKey="Selling"
@@ -69,8 +95,11 @@ const ResultsChart: React.FC<ResultsChartProps> = ({ chartData }) => (
           stackId="a"
           fill={COLORS.adminHex}
           radius={[0, 16, 16, 0]}
-          isAnimationActive={false}
+          isAnimationActive={true}
+          animationDuration={400}
           barSize={48}
+          style={{ pointerEvents: 'none' }} // Prevents all hover/focus highlight and disables tooltip
+          activeBar={false}
         >
           <LabelList
             dataKey="Admin"

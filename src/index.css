@@ -183,3 +183,11 @@ button:focus-visible {
     @apply bg-background text-foreground;
   }
 }
+
+/* Remove Recharts bar hover/focus background (SVG rect) */
+.recharts-rectangle:hover, .recharts-rectangle:focus,
+rect.recharts-rectangle:hover, rect.recharts-rectangle:focus {
+  fill: inherit !important;
+  background: none !important;
+  box-shadow: none !important;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Slider } from './ui/slider';
 
 interface SliderControlProps {
@@ -41,11 +41,16 @@ const SliderControl: React.FC<SliderControlProps> = ({
   </div>
 );
 
-const SlidersPanel: React.FC = () => {
-  const [headcount, setHeadcount] = useState(5);
-  const [adminTime, setAdminTime] = useState(20);
-  const [avgPay, setAvgPay] = useState(75000);
+interface SlidersPanelProps {
+  headcount: number;
+  setHeadcount: (v: number) => void;
+  adminTime: number;
+  setAdminTime: (v: number) => void;
+  avgPay: number;
+  setAvgPay: (v: number) => void;
+}
 
+const SlidersPanel: React.FC<SlidersPanelProps> = ({ headcount, setHeadcount, adminTime, setAdminTime, avgPay, setAvgPay }) => {
   return (
     <div className="flex flex-col gap-8 self-auto lg:w-full lg:h-full">
       <SliderControl
