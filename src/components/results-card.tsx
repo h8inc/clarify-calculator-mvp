@@ -44,7 +44,7 @@ const ResultsCard: React.FC<ResultsCardProps> = ({ headcount, adminTime, avgPay 
   const ariaMessage = `Chart updated: Clarify admin ${Math.round(adminWithClarify)} hours, selling ${Math.round(sellingWithClarify)} hours. Other admin ${Math.round(adminWithoutClarify)} hours, selling ${Math.round(sellingWithoutClarify)} hours.`;
 
   // Calculate annual time saved
-  const annualTimeSaved = Math.round(timeSaved * 52);
+  // const annualTimeSaved = Math.round(timeSaved * 52); // For future use
 
   return (
     <section className="bg-card rounded-2xl border border-gray-100 md:p-6 p-4 w-full flex flex-col gap-8 shadow-sm" aria-label="Results summary: hours selling vs admin">

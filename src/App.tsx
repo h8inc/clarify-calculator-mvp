@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ResultsCard from './components/results-card';
 import SlidersPanel from './components/SlidersPanel';
 import { Sheet, SheetTrigger, SheetContent } from './components/ui/sheet';

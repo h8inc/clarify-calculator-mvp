@@ -98,9 +98,6 @@ button:focus-visible {
   a:hover {
     color: #747bff;
   }
-  button {
-    background-color: #f9f9f9;
-  }
 }
 
 @theme inline {
@@ -187,7 +184,7 @@ button:focus-visible {
 /* Remove Recharts bar hover/focus background (SVG rect) */
 .recharts-rectangle:hover, .recharts-rectangle:focus,
 rect.recharts-rectangle:hover, rect.recharts-rectangle:focus {
-  fill: inherit !important;
+  fill: none !important;
   background: none !important;
   box-shadow: none !important;
 }
