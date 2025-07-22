@@ -38,7 +38,7 @@ function App() {
               <Button className="w-full max-w-md pointer-events-auto shadow-lg font-semibold text-base py-4 rounded-xl">Adjust Inputs</Button>
             </SheetTrigger>
             <SheetContent side="bottom" className="p-0 rounded-t-2xl border-none pb-[env(safe-area-inset-bottom)] !max-h-[90vh] !overflow-y-auto items-start">
-              <div className="p-4">
+              <div className="p-4 w-full">
                 <SlidersPanel
                   headcount={headcount}
                   setHeadcount={setHeadcount}

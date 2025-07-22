@@ -19,7 +19,7 @@ const SliderControl: React.FC<SliderControlProps> = ({
   label, value, setValue, min, max, step = 1, valueDisplay, minLabel, maxLabel, unit, className = ""
 }) => (
   <div className={`flex flex-col justify-between lg:h-full bg-[#FDFEFE] rounded-2xl border border-gray-100 shadow-sm p-4 w-full min-h-[120px] ${className}`}>
-    <div className="flex flex-row justify-between items-end">
+    <div className="flex flex-row justify-between items-end w-full min-w-0">
       <span className="text-[1.125rem] font-medium text-gray-900 font-['Manrope']">{label}</span>
       <span className="text-[1.125rem] font-semibold text-gray-700 font-['Manrope']">
         {valueDisplay}{unit && <span className="text-[0.875rem] font-normal text-gray-600 ml-1">{unit}</span>}

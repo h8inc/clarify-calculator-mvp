@@ -47,7 +47,7 @@ const ResultsCard: React.FC<ResultsCardProps> = ({ headcount, adminTime, avgPay 
   // const annualTimeSaved = Math.round(timeSaved * 52); // For future use
 
   return (
-    <section className="bg-card rounded-2xl border border-gray-100 md:p-6 p-4 w-full flex flex-col gap-8 shadow-sm" aria-label="Results summary: hours selling vs admin">
+    <section className="bg-card rounded-2xl border border-gray-100 md:p-6 p-4 w-full flex flex-col gap-8 shadow-sm mb-24 md:mb-0" aria-label="Results summary: hours selling vs admin">
       <SavingsDescription fromHours={Math.round(sellingWithoutClarify)} toHours={Math.round(sellingWithClarify)} />
       <SavingsRow kpi1={`${Math.round(timeSaved)} hours`} kpi2={`$${weeklyCostSavings.toLocaleString(undefined, { maximumFractionDigits: 0, minimumFractionDigits: 0 })}`} />
       <ResultsChart chartData={chartData} chartHours={chartHours} ariaMessage={ariaMessage} />
