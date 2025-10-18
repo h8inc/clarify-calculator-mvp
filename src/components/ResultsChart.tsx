@@ -50,17 +50,22 @@ interface ResultsChartProps {
   ariaMessage: string;
 }
 
-const ResultsChart: React.FC<ResultsChartProps> = ({ chartData, chartHours, ariaMessage }) => (
-  <div className="flex flex-col gap-8 w-full" aria-label="results-chart">
-    {/* ARIA live region for accessibility */}
-    <div aria-live="polite" className="sr-only">{ariaMessage}</div>
-    <ResponsiveContainer width="100%" height={160}>
-      <BarChart
-        data={chartData}
-        layout="vertical"
-        barCategoryGap={32}
-        margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-      >
+const ResultsChart: React.FC<ResultsChartProps> = ({ chartData, chartHours, ariaMessage }) => {
+  // Create a unique key based on the data to force re-render
+  const chartKey = chartData.map(d => `${d.name}-${d.Selling}-${d.Admin}`).join('-');
+  
+  return (
+    <div className="flex flex-col gap-8 w-full" aria-label="results-chart">
+      {/* ARIA live region for accessibility */}
+      <div aria-live="polite" className="sr-only">{ariaMessage}</div>
+      <ResponsiveContainer width="100%" height={160}>
+        <BarChart
+          key={chartKey}
+          data={chartData}
+          layout="vertical"
+          barCategoryGap={32}
+          margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+        >
         <XAxis type="number" domain={[0, 100]} hide />
         <YAxis
           dataKey="name"
@@ -81,6 +86,7 @@ const ResultsChart: React.FC<ResultsChartProps> = ({ chartData, chartHours, aria
           radius={[16, 0, 0, 16]}
           isAnimationActive={true}
           animationDuration={400}
+          animationBegin={0}
           barSize={48}
           style={{ pointerEvents: 'none' }} // Prevents all hover/focus highlight and disables tooltip
           activeBar={false}
@@ -97,6 +103,7 @@ const ResultsChart: React.FC<ResultsChartProps> = ({ chartData, chartHours, aria
           radius={[0, 16, 16, 0]}
           isAnimationActive={true}
           animationDuration={400}
+          animationBegin={0}
           barSize={48}
           style={{ pointerEvents: 'none' }} // Prevents all hover/focus highlight and disables tooltip
           activeBar={false}
@@ -128,6 +135,7 @@ const ResultsChart: React.FC<ResultsChartProps> = ({ chartData, chartHours, aria
       </div>
     </div>
   </div>
-);
+  );
+};
 
 export default ResultsChart; 
